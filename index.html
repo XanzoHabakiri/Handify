@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор Текста - PDF</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <!-- Логотип Handify -->
+        <div class="logo">
+            <a href="#" class="logo-link" title="Handify">
+                <img src="logo.png" alt="Handify" class="logo-img">
+            </a>
+        </div>
+
+        <!-- Правый блок: ссылки на Telegram и переключатель языка -->
+        <div class="nav-right">
+            <div class="tg-links">
+                <!-- Бот -->
+                <a href="https://t.me/HandWiriteFonts_bot" target="_blank" rel="noopener noreferrer" class="tg-btn" title="Telegram Bot">
+                    <svg class="tg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                    <span data-i18n="tg-bot">Бот</span>
+                </a>
+
+                <!-- Канал -->
+                <a href="https://t.me/+iKnG3xfTLNllNzNi" target="_blank" rel="noopener noreferrer" class="tg-btn" title="Telegram Channel">
+                    <svg class="tg-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 00-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.36-.01-1.04-.2-1.55-.37-.63-.2-1.12-.31-1.08-.66.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/>
+                    </svg>
+                    <span data-i18n="tg-channel">Канал</span>
+                </a>
+            </div>
+
+            <!-- Переключатель языков -->
+            <div class="lang-switcher">
+                <span id="lang-uz" class="lang-btn active">O'zbekcha</span> | 
+                <span id="lang-ru" class="lang-btn">Русский</span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="app-container">
+        
+        <!-- ЛЕВАЯ ЧАСТЬ -->
+        <div class="sidebar-controls">
+            
+            <div class="section-title" data-i18n="main-settings">Основные настройки</div>
+            <div class="control-section">
+                
+                <div class="top-settings-grid">
+                    <div class="textarea-container">
+                        <textarea id="text-input" data-i18n="placeholder-text" placeholder="Введите текст сюда..."></textarea>
+                    </div>
+                    
+                    <div class="main-buttons">
+                        <button id="btn-convert" class="btn-primary" data-i18n="btn-convert">Конвертировать</button>
+                        
+                        <label data-i18n="choose-font">Выберите шрифт</label>
+                            <select id="font-select">
+                                <option value="MyCustomFont">Кастомный Шрифт (Демо)</option>
+                                <option value="Arial" selected>Arial</option>
+                                <option value="Times New Roman">Times New Roman</option>
+                            </select>
+                        
+                        <label for="font-upload" class="btn-secondary" data-i18n="upload-font">Загрузить шрифт</label>
+                        <input type="file" id="font-upload" accept=".ttf, .otf, .woff">
+
+                        <label data-i18n="choose-color">Выберите цвет</label>
+                        <select id="color-select">
+                            <option value="classic" data-i18n="color-1">Синий 1</option>
+                            <option value="dark-blue" data-i18n="color-2">Синий 2</option>
+                            <option value="light-blue" data-i18n="color-3">Синий 3</option>
+                            <option value="black" data-i18n="color-black">Черный</option>
+                            <option value="red" data-i18n="color-red">Красный</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="sliders-grid">
+                    <div class="control-item"><label data-i18n="font-size">Размер шрифта <span class="show-font-size" style="font-size:11px; color: #4a5568; padding-left: 5px;"> </span></label><input type="range" id="font-size" min="10" max="96" value="24"></div>
+                    <div class="control-item"><label data-i18n="padding-top">Отступ сверху (px)</label><input type="range" id="padding-top" min="0" max="200" value="30"></div>
+                    <div class="control-item"><label data-i18n="padding-bottom">Отступ снизу (px)</label><input type="range" id="padding-bottom" min="0" max="200" value="30"></div>
+                    <div class="control-item"><label data-i18n="word-spacing">Расстояние между словами</label><input type="range" id="word-spacing" min="-30" max="30" value="5"></div>
+                    <div class="control-item"><label data-i18n="padding-left">Отступ с левого края (px)</label><input type="range" id="padding-left" min="0" max="200" value="40"></div>
+                    <div class="control-item"><label data-i18n="line-height">Расстояние между строками</label><input type="range" id="line-height" min="0" max="3" step="0.1" value="1.5"></div>
+                    <div class="control-item"><label data-i18n="padding-left-even">Отступ с левого края (четные стр.)</label><input type="range" id="padding-left-even" min="0" max="200" value="40"></div>
+                    <div class="control-item"><label data-i18n="rotate-text">Повернуть весь текст (px)</label><input type="range" id="rotate-text" min="-10" max="10" step="0.5" value="0"></div>
+                    <div class="control-item"><label data-i18n="padding-right">Отступ с правого края (px)</label><input type="range" id="padding-right" min="0" max="200" value="40"></div>
+                    <div class="control-item"><label data-i18n="text-width">Ширина ячейки / текста (%)</label><input type="range" id="text-width" min="10" max="100" value="100"></div>
+                </div>
+            </div>
+            
+            <div class="section-title" data-i18n="modifications">Модификации</div>
+            <div class="control-section">
+                
+                <div class="control-item full-width-slider">
+                    <label style="text-align: center; font-weight: bold; margin-bottom: 10px;" data-i18n="rand-freq">Частота рандомизации</label>
+                    <input type="range" id="rand-freq" min="0" max="100" value="50">
+                </div>
+                
+                <div class="dropdowns-grid">
+                    <div class="control-item">
+                        <label data-i18n="rand-word-space">Рандомное расстояние между словами</label>
+                        <select id="mod-word-spacing">
+                            <option value="0" data-i18n="opt-none">Не использовать</option>
+                            <option value="1" data-i18n="opt-weak-word">Слабо (каждое 3-е слово)</option>
+                            <option value="2" data-i18n="opt-strong-word">Сильно (каждое 2-е слово)</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label data-i18n="rand-letter-space">Рандомное расстояние между буквами</label>
+                        <select id="mod-letter-spacing">
+                            <option value="0" data-i18n="opt-none">Не использовать</option>
+                            <option value="1" data-i18n="opt-weak-letter">Слабо (каждая 3-я буква)</option>
+                            <option value="2" data-i18n="opt-strong-letter">Сильно (каждая 2-я буква)</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label data-i18n="rand-letter-size">Разный размер букв</label>
+                        <select id="mod-letter-size">
+                            <option value="0" data-i18n="opt-none">Не использовать</option>
+                            <option value="1" data-i18n="opt-weak-letter">Слабо (каждая 3-я буква)</option>
+                            <option value="2" data-i18n="opt-strong-letter">Сильно (каждая 2-я буква)</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label data-i18n="rand-line-height">Рандомное расстояние между строками</label>
+                        <select id="mod-line-height">
+                            <option value="0" data-i18n="opt-none">Не использовать</option>
+                            <option value="1" data-i18n="opt-use">Использовать</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label data-i18n="rand-paragraph">Рандомный размер абзаца</label>
+                        <select id="mod-paragraph">
+                            <option value="0" data-i18n="opt-none">Не использовать</option>
+                            <option value="1" data-i18n="opt-use">Использовать</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label data-i18n="rand-font">Рандомизация шрифта</label>
+                        <select id="mod-font">
+                            <option value="0" data-i18n="opt-none">Не использовать</option>
+                            <option value="1" data-i18n="opt-use">Использовать</option>
+                        </select>
+                    </div>
+                    <div class="control-item">
+                        <label data-i18n="blots">Помарки</label>
+                        <select id="mod-blots">
+                            <option value="0" data-i18n="opt-none">Не использовать</option>
+                            <option value="1" data-i18n="opt-use">Использовать</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bottom-settings-flex">
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" id="rand-tilt"> <span data-i18n="rand-tilt">Рандомный наклон слов</span></label>
+                        <label><input type="checkbox" id="rand-height"> <span data-i18n="rand-height">Рандомная высота подъема</span></label>
+                    </div>
+                    <div class="control-item" style="grid-column: span 2; margin-top: 10px;">
+                        <label style="font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                            <input type="checkbox" id="table-mode"> <span data-i18n="table-mode">Режим таблицы (Enter = новый столбец)</span>
+                        </label>
+                    </div>
+                    <div class="background-group">
+                        <label style="font-weight: bold; margin-bottom: 10px; display: block;" data-i18n="choose-bg">Выберите фон</label>
+                        
+                        <label for="custom-bg-upload" class="btn-secondary" style="margin-top: 10px;" data-i18n="upload-bg">Загрузить свой фон</label>
+                        <input type="file" id="custom-bg-upload" accept="image/*">
+                        
+                        <div style="margin-top: 10px;">
+                            <label><input type="checkbox" id="remove-bg"> <span data-i18n="remove-bg">Убрать фон</span></label>
+                        </div>
+                    </div>
+                </div>
+                <div class="export-grid">
+                    <button id="export-settings" class="btn-secondary" data-i18n="btn-export-settings">Скачать настройки</button>
+                    <label for="import-settings" class="btn-secondary" style="margin:0;" data-i18n="btn-import-settings">Загрузить настройки</label>
+                    <input type="file" id="import-settings" accept=".json" style="display:none;">
+                </div>
+            </div>
+        </div>
+
+        <!-- ПРАВАЯ ЧАСТЬ -->
+        <div class="result-area">
+            <div class="pagination-header">
+                <button id="prev-page" class="nav-btn" data-i18n="btn-prev">◀ Назад</button>
+                <span id="page-indicator">Страница 1 из 1</span>
+                <button id="next-page" class="nav-btn" data-i18n="btn-next">Вперед ▶</button>
+            </div>
+            
+            <div class="a4-wrapper" id="a4-wrapper">
+                <div id="pages-container"></div>
+            </div>
+
+            <div class="export-footer">
+                <button id="download-pdf" class="btn-export" data-i18n="btn-download-pdf">Сохранить в PDF (A4)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Сначала язык, потом основная логика -->
+    <script src="lang.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

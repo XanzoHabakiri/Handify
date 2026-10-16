@@ -1,0 +1,214 @@
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('demoNotEnded.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, sans-serif; height: 100vh; overflow: hidden; color: #333; display: flex; flex-direction: column; background-color: #f0f2f5; }
+.navbar { height: 60px; background-color: #ffffff; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: flex; align-items: center; padding: 0 20px; z-index: 10; }
+.logo h1 { font-size: 20px; color: #4a5568; margin: 0; }
+.app-container { display: flex; flex: 1; overflow: hidden; }
+
+.sidebar-controls { width: 550px; background-color: #ffffff; border-right: 1px solid #ddd; overflow-y: auto; display: flex; flex-direction: column; }
+.sidebar-controls::-webkit-scrollbar { width: 6px; }
+.sidebar-controls::-webkit-scrollbar-track { background: #f1f1f1; }
+.sidebar-controls::-webkit-scrollbar-thumb { background: #c1c1c1; border-radius: 4px; }
+
+.section-title { background-color: #e2e8f0; padding: 10px 20px; font-weight: bold; text-align: center; color: #2d3748; border-top: 1px solid #cbd5e0; border-bottom: 1px solid #cbd5e0; }
+.section-title:first-child { border-top: none; }
+.control-section { padding: 20px; }
+
+.top-settings-grid { display: flex; gap: 15px; margin-bottom: 20px; }
+.textarea-container { flex: 2; }
+#text-input { width: 100%; height: 180px; resize: none; padding: 10px; border: 1px solid #cbd5e0; border-radius: 4px; font-family: inherit; }
+
+.main-buttons { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.main-buttons select { padding: 6px; border: 1px solid #cbd5e0; border-radius: 4px; }
+input[type="file"] { display: none; }
+.btn-primary, .btn-secondary, .btn-export { display: block; width: 100%; text-align: center; padding: 8px; border-radius: 4px; cursor: pointer; font-size: 14px; border: none; transition: 0.2s; }
+.btn-primary { background-color: #718096; color: white; }
+.btn-primary:hover { background-color: #4a5568; }
+.btn-secondary { background-color: #edf2f7; color: #4a5568; border: 1px solid #cbd5e0;  }
+.btn-secondary:hover { background-color: #e2e8f0; }
+
+.sliders-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px 25px; padding-top: 15px; border-top: 1px dashed #cbd5e0; }
+.control-item label { display: block; font-size: 11px; color: #4a5568; margin-bottom: 5px; }
+.control-item input[type="range"] { width: 100%; cursor: pointer; }
+.full-width-slider { margin-bottom: 20px; }
+
+.checkbox-grid label { font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.bottom-settings-flex { display: flex; gap: 20px; border-top: 1px dashed #cbd5e0; padding-top: 20px; flex-wrap: wrap;  width: 80%;}
+.checkbox-group { flex: 1; display: flex; flex-direction: column; gap: 15px; border-right: 1px dashed #cbd5e0; padding-right: 15px; }
+.checkbox-group label, .background-group label { font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+.background-group { flex: 1; }
+.bg-options { display: flex; flex-direction: column; gap: 10px; }
+
+.result-area { flex: 1; display: flex; flex-direction: column; background-color: #cbd5e0; position: relative; }
+.pagination-header { height: 50px; background-color: #e2e8f0; display: flex; align-items: center; justify-content: center; gap: 20px; box-shadow: 0 2px 5px rgba(0,0,0,0.05); z-index: 5; }
+.nav-btn { padding: 5px 15px; border: 1px solid #a0aec0; background: white; cursor: pointer; border-radius: 4px; }
+.nav-btn:hover { background: #f7fafc; }
+#page-indicator { font-weight: bold; color: #2d3748; }
+
+.a4-wrapper { flex: 1; overflow-y: auto; padding: 30px; display: flex; justify-content: center; align-items: flex-start; }
+#pages-container { position: relative; }
+
+.a4-page { 
+    width: 210mm; 
+    height: 297mm; 
+    background-color: white; 
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); 
+    margin-bottom: 30px; 
+    position: relative; 
+    overflow: hidden; 
+    background-size: cover; 
+    background-position: center; 
+    display: none; 
+}
+.a4-page.active { display: block; }
+
+.page-content { 
+    width: 100%; 
+    height: 100%; 
+    white-space: pre-wrap; /* ВАЖНО: сохраняет переносы строк! */
+    word-wrap: break-word; 
+    font-size: var(--font-size, 24px); 
+    word-spacing: var(--word-spacing, 5px); 
+    line-height: var(--line-height, 1.5); 
+    padding-top: var(--padding-top, 30px); 
+    padding-left: var(--padding-left, 40px); 
+    padding-right: var(--padding-right, 1em); 
+    width: var(--text-width, 100%); 
+    transform: rotate(var(--rotate, 0deg)); 
+    transform-origin: top center; 
+    color: var(--text-color, blue); 
+}
+
+.export-footer { padding: 15px 30px; background: #e2e8f0; text-align: right; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
+.btn-export { background-color: #3182ce; color: white; width: auto; padding: 10px 20px; display: inline-block; font-weight: bold; border-radius: 4px; border: none; cursor: pointer; }
+.btn-export:hover { background-color: #2b6cb0; }
+.dropdowns-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+.dropdowns-grid select {
+    width: 100%;
+    padding: 6px;
+    border: 1px solid #cbd5e0;
+    border-radius: 4px;
+    margin-top: 5px;
+    font-size: 12px;
+}
+/* Принудительно включаем лигатуры и соединения букв для рукописных шрифтов */
+.page-content {
+    font-variant-ligatures: normal;
+    font-feature-settings: "liga" 1, "clig" 1, "calt" 1, "kern" 1;
+    text-rendering: optimizeLegibility;
+}
+
+/* Стили для идеального экспорта в PDF через систему браузера */
+@media print {
+    @page { size: A4 portrait; margin: 0; }
+    body, html { margin: 0; padding: 0; background-color: white; overflow: visible !important; }
+    
+    /* Скрываем весь интерфейс сайта, оставляем только листы */
+    .navbar, .sidebar-controls, .pagination-header, .export-footer { 
+        display: none !important; 
+    }
+    
+    .app-container, .result-area, .a4-wrapper { 
+        display: block !important; 
+        overflow: visible !important; 
+        padding: 0 !important; 
+        height: auto !important; 
+    }
+    
+    .a4-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        page-break-after: always;
+        page-break-inside: avoid;
+        display: block !important;
+    }
+}
+.lang-switcher { margin-left: auto; font-size: 14px; color: #4a5568; }
+.lang-btn { cursor: pointer; padding: 5px; opacity: 0.5; transition: 0.2s; font-weight: bold; }
+.lang-btn.active { opacity: 1; color: #3182ce; border-bottom: 2px solid #3182ce; }
+.lang-btn:hover { opacity: 0.8; }
+.export-grid { 
+    margin-top: 20px;
+     display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+.background-group .btn-secondary{
+    width: 100px;
+}
+/* --- СТИЛИ ДЛЯ ЛОГОТИПА И КНОПОК TELEGRAM --- */
+.logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 100px; /* Идеально помещается в 60px шапки */
+    width: auto;
+    object-fit: contain;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.logo-link:hover .logo-img {
+    transform: scale(1.03);
+}
+
+.nav-right {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.tg-links {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.tg-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background-color: #f7fafc;
+    color: #0088cc;
+    border: 1px solid #cbd5e0;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.tg-btn .tg-icon {
+    flex-shrink: 0;
+}
+
+.tg-btn:hover {
+    background-color: #0088cc;
+    color: #ffffff;
+    border-color: #0088cc;
+    box-shadow: 0 2px 6px rgba(0, 136, 204, 0.25);
+    transform: translateY(-1px);
+}
+
+/* На мобильных экранах оставляем только иконки самолётика */
+@media (max-width: 600px) {
+    .tg-btn span {
+        display: none;
+    }
+    .tg-btn {
+        padding: 6px 8px;
+        border-radius: 50%;
+    }
+}
